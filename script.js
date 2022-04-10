@@ -1,19 +1,6 @@
 function computerPlay() {
-    let game = Math.floor(Math.random() * 3);
-    switch(game) {
-        case 0:
-            hand = "Rock";
-            return hand;
-            break;
-        case 1:
-            hand = "Paper";
-            return hand;
-            break;
-        case 2:
-            hand = "Scissors";
-            return hand;
-            break;
-    }
+    let options = ["Rock", "Paper", "Scissors"];
+    return options[Math.floor(Math.random() *3)];
 }
 
 function playerPlay() {
@@ -37,6 +24,8 @@ function playerWrong(choice){
 
 function gameRound () {
 
+    let result = "";
+
     computerSelection = computerPlay();
     console.log("Computer choice was: " + computerSelection);
 
@@ -45,41 +34,78 @@ function gameRound () {
 
     if(playerSelection === "Rock") {
         if(computerSelection === "Rock") {
-            console.log("Draw");
+            result = "Draw";
         }
         if(computerSelection === "Paper") {
-            console.log("Computer wins");
+            result = "Computer wins";
         }
         if(computerSelection === "Scissors") {
-            console.log("Player wins");
+            result = "Player wins";
         }
     }
 
     if(playerSelection === "Paper") {
         if(computerSelection === "Rock") {
-            console.log("Player wins");
+            result = "Player wins";
         }
         if(computerSelection === "Paper") {
-            console.log("Draw");
+            result = "Draw";
         }
         if(computerSelection === "Scissors") {
-            console.log("Computer wins");
+            result = "Computer wins";
         }
     }
 
     if(playerSelection === "Scissors") {
         if(computerSelection === "Rock") {
-            console.log("Computer Wins");
+            result = "Computer wins";
         }
         if(computerSelection === "Paper") {
-            console.log("Player wins");
+            result = "Player wins";
         }
         if(computerSelection === "Scissors") {
-            console.log("Draw wins");
+            result = "Draw";
         }
     }
 
+    console.log(result);
+
+    return result;
 
 }
 
-gameRound();
+function game() {
+
+    let numberofRounds = parseInt(prompt("How many rounds would you like to play?"));
+
+    let computerScore = 0;
+    let playerScore = 0;
+    let roundResult = "";
+
+    for (let i = 1; i <= numberofRounds; i++){
+
+        console.log("Round " + i);
+
+        roundResult = gameRound();
+
+        if(roundResult === "Computer wins") {
+
+            computerScore++;
+        } else if(roundResult === "Player wins") {
+
+            playerScore ++;
+        }
+    }
+
+    if(computerScore === playerScore) {
+
+        console.log("The game ends in a draw after " + numberofRounds + " rounds!");
+
+    } else if(computerScore > playerScore) {
+        
+        console.log("The computer wins after " + numberofRounds + " rounds!");
+    } else console.log("The player wins after " + numberofRounds + " rounds!");
+
+}
+
+game();
